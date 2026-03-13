@@ -1,0 +1,211 @@
+\documentclass[12pt, a4paper]{article}
+
+% Packages untuk matematika dan tata letak
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% Informasi Dokumen
+\title{Dinamika Trixe (T): Kerangka Kerja Matematis untuk Transformasi Informasi dari Kekacauan Probabilistik ke Determinisme Absolut}
+\author{Muhammad Rifat Qolby Almusawa \\ \small \textit{Independent Researcher}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Model Trixe memperkenalkan sebuah arsitektur tripartit yang menghubungkan domain probabilistik ($<Xe$), mekanisme stabilisasi ($Xe$ dengan Variabel Orbital $O_v$), serta singularitas informasi ($>Xe$) melalui jalur transisi $0Xe$. Bagian ini merumuskan persamaan evolusi, operator stabilisator, mekanisme kopling non-linear, dan operator singularitas sehingga model menjadi dapat diverifikasi secara matematis \cite{strogatz1994, shannon1948}. Model ini secara kuantitatif mengidentifikasi titik bifurkasi kritis pada $\alpha=\beta$ sebagai batas stabilitas asimtotik yang menentukan keberhasilan transformasi informasi dari fluktuasi stokastik menjadi luaran deterministik yang absolut.
+\end{abstract}
+
+\textbf{Index Terms:} Analisis Bifurkasi; Determinisme Absolut; Kekacauan Probabilistik; Model Trixe; Variabel Orbital.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\section{Pendahuluan dan Posisi Keilmuan}
+Masalah transisi dari sistem probabilistik menuju deterministik merupakan persoalan fundamental yang telah lama dieksplorasi melalui berbagai lensa, mulai dari struktur disipatif jauh dari kesetimbangan \cite{prigogine1977} hingga \textit{Synergetics} yang merumuskan parameter orde dalam pengorganisasian mandiri \cite{haken1983}. Dalam domain kontrol stokastik dan pemrosesan sinyal, filter Bayesian sering digunakan untuk mereduksi ketidakpastian secara bertahap \cite{jazwinski1970}. 
+
+Namun, pendekatan tradisional umumnya memandang transisi deterministik sebagai produk sampingan dari stabilisasi termodinamik yang lambat. Model Trixe (T) membedakan dirinya dengan mengajukan hipotesis struktural yang operasional: menempatkan \textit{singularitas informasi} bukan sebagai titik kegagalan matematis, melainkan sebagai operator mekanistik yang secara aktif memproses dan meruntuhkan entropi. 
+
+Perlu ditegaskan bahwa dalam konteks kerangka kerja ini, istilah "Determinisme Absolut" tidak diajukan sebagai klaim filosofis atau epistemologis. Istilah ini didefinisikan secara batas operasional ketat sebagai kondisi limit di mana varians dari distribusi probabilitas sistem meluruh menuju nol ($\sigma^2 \to 0$) pada $t \to \infty$, menghasilkan lintasan fase tunggal yang sepenuhnya terprediksi secara matematis.
+
+Makalah ini tidak bertujuan untuk menantang mekanika statistik klasik, melainkan memperluas kerangka kendali stokastik. Dengan memperkenalkan arsitektur tripartit ($<Xe$, $0Xe$, $>Xe$), Model Trixe menyediakan formulasi bagaimana fluktuasi probabilistik tingkat rendah dapat dipaksa berkonvergensi secara asimtotik ke dalam keluaran deterministik melalui intervensi variabel orbital dan operator non-linear.
+
+\section{Struktur dan Formulasi Matematis}
+
+\subsection{Notasi dan Asumsi Dasar}
+\begin{itemize}
+    \item \textbf{Domain ruang:} $\Omega\subset \mathbb{R}^{n}$.
+    \item \textbf{Waktu:} $t\in[0,\infty)$.
+    \item \textbf{Asumsi fungsi:} Semua fungsi diasumsikan cukup halus (kelas $C^{2}$).
+    \item \textbf{Parameter:} $\alpha, \beta, \lambda_{k}, \kappa_{ji}$ beroperasi dengan kondisi tanda yang diperlukan untuk kestabilan sistem dinamik \cite{guckenheimer1983}.
+\end{itemize}
+
+\subsection{$<Xe$ Model Kekacauan Probabilistik}
+$<Xe$ didefinisikan melalui kepadatan probabilitas $P(x,t)$. Representasi stokastik dimodelkan melalui proses Langevin \cite{langevin1908, lemongythiel1997}: 
+\begin{equation}
+dx_{t}=a(x_{t},t)dt+b(x_{t},t)dW_{t}
+\end{equation}
+dengan $W_{t}$ sebagai proses Wiener. Padanan evolusi densitasnya adalah persamaan Fokker-Planck \cite{risken1989}:
+\begin{equation}
+\frac{\partial P(x,t)}{\partial t}=-\nabla \cdot(a(x,t)P(x,t))+\nabla^{2}(D(x,t)P(x,t))
+\end{equation}
+Di mana $D(x,t)=\frac{1}{2}b(x,t)b(x,t)^{T}$ adalah matriks difusi lokal.
+
+\subsection{Stabilisator dan Variabel Orbital $O_{v}$}
+Sistem memperkenalkan vektor stabilisator $S(t)=(S_{1}(t),...,S_{m}(t))$ yang memenuhi Persamaan Diferensial Biasa (ODE):
+\begin{equation} \label{eq:stabilizer}
+\frac{dS_{j}}{dt}=-\alpha_{j}S_{j}+\beta_{j}G_{j}[P(\cdot,t)]+\sum_{i}\kappa_{ji}H_{ji}(S_{i},P)
+\end{equation}
+Di mana $\alpha_{j}>0$ adalah koefisien peredaman asimtotik. Variabel orbital didefinisikan sebagai limit:
+\begin{equation}
+O_{V}:=\lim_{t\rightarrow\infty}S(t)
+\end{equation}
+
+\subsection{Kopling Antar-Komponen dan Dimensi Operasional}
+Kopling antar komponen membutuhkan kehati-hatian dimensional. Misalkan terdapat parameter medan deterministik $u_{S}$ dan fungsi pembobot $w(x)$. Untuk mempertahankan konsistensi dimensional dalam persamaan kopling, $w(x)$ didefinisikan sebagai skalar tak berdimensi (melambangkan densitas probabilitas yang dinormalisasi), sedangkan $u_{S}$ dan fungsi transfernya memiliki dimensi spasial yang kongruen dengan domain $x \in \Omega$.
+
+\subsection{Formulasi Eksplisit: Toy-Model 1D}
+Untuk menjadikan model ini \textit{verifiable}, kita tinjau kasus "Toy-Model" 1D dengan variabel ruang $x$ tunggal dan satu penyeimbang $S(t)$. Fungsional $G[P]$ didefinisikan secara eksplisit sebagai momen pertama (nilai ekspektasi) dari distribusi:
+\begin{equation}
+G[P] = \int_{\Omega} x P(x,t) dx = \mu(t)
+\end{equation}
+Istilah kopling non-linear $H(S,P)$ diformulasikan untuk merespons varians spasial:
+\begin{equation}
+H(S,P) = S(t) \left( \int_{\Omega} x^2 P(x,t) dx - \mu(t)^2 \right) = S(t)\sigma^2(t)
+\end{equation}
+Substitusi ke dalam Persamaan (\ref{eq:stabilizer}) menghasilkan sistem tertutup. Langkah ini melibatkan asumsi penyederhanaan momen derajat tinggi (\textit{moment closure problem}), di mana momen ketiga (\textit{skewness}) dan keempat (\textit{kurtosis}) diasumsikan tidak berkontribusi signifikan terhadap dinamika kopling saat sistem berada di dekat ekuilibrium:
+\begin{equation}
+\frac{dS}{dt} = -\alpha S + \beta \mu(t) + \kappa S \sigma^2(t)
+\end{equation}
+Formulasi eksplisit ini memungkinkan komputasi titik tetap dan evaluasi matriks Jacobian $2 \times 2$ secara analitis untuk menguji batasan stabilitas.
+
+\subsection{$0Xe$ - Dinamika Ketidaksempurnaan}
+Jalur transisi dimodelkan sebagai variabel $R(t)$:
+\begin{equation}
+\frac{dR_{k}}{dt}=-\lambda_{k}R_{k}+\Gamma_{k}[P,S]+\sum_{l}\mu_{kl}\Phi_{kl}(R_{l})
+\end{equation}
+Kondisi $\lambda_{k}>0$ diterapkan untuk mencegah divergensi.
+
+\subsection{$>Xe$ Singularitas Informasi dan Operator $h$}
+Singularitas dipandang sebagai operator transformasi $h$ yang mengubah distribusi $P$ menjadi keluaran deterministik.
+\begin{itemize}
+    \item \textbf{Kernel collapse (regularisasi):} 
+    \begin{equation}
+    h[P](y)=\lim_{\sigma\rightarrow0}\int_{\Omega}K_{\sigma}(y,z)P(z)dz\approx\delta(y-y^{*})
+    \end{equation}
+\end{itemize}
+
+\section{Verifikasi Numerik dan Stabilitas}
+
+\subsection*{Metodologi Implementasi Numerik}
+Integrasi variabel sistem memerlukan pendekatan campuran yang ketat karena adanya variabel stokastik (proses Wiener).
+\begin{itemize}
+    \item Evolusi probabilitas makroskopik (Persamaan Fokker-Planck) diintegrasikan menggunakan Metode Beda Hingga (\textit{Finite Difference Method}) dengan skema \textit{Crank-Nicolson} untuk menjamin stabilitas numerik tak bersyarat dan kekekalan massa $\int P = 1$.
+    \item Realisasi sampel probabilitas stokastik (SDE) dieksekusi menggunakan skema \textbf{Euler-Maruyama} untuk memastikan validitas konvergensi kuat dalam kalkulus Ito.
+    \item Sistem ODE deterministik yang terkopel (evolusi variabel $S(t)$) diintegrasikan menggunakan skema \textbf{Runge-Kutta Orde Empat (RK4)}.
+\end{itemize}
+
+\subsection*{Formulasi Simulasi Numerik (Euler-Maruyama dan RK4)}
+Berdasarkan parameter skenario uji, sistem persamaan diferensial diskrit berikut dieksekusi secara simultan dengan resolusi waktu $\Delta t$:
+
+\textbf{1. Evolusi Sampel Probabilistik (Euler-Maruyama):} \\
+Persamaan Langevin disimulasikan untuk kumpulan $N$ agen probabilitas (mewakili distribusi ruang fase $X$) menggunakan skema Euler-Maruyama:
+\begin{equation}
+X^{(i)}_{n+1} = X^{(i)}_{n} - k_{pull} (X^{(i)}_{n} - S_{n}) \Delta t + \sigma \sqrt{\Delta t} Z^{(i)}_{n}
+\end{equation}
+di mana $Z^{(i)}_{n} \sim \mathcal{N}(0,1)$ adalah variabel acak Gaussian standar, $k_{pull}$ adalah kekuatan tarikan singularitas menuju determinisme, dan $\sigma$ adalah intensitas kekacauan awal (\textit{noise}). Pada setiap langkah $n$, momen pertama (ekspektasi) probabilitas diekstraksi secara empiris:
+\begin{equation}
+\mu_{n} = \frac{1}{N} \sum_{i=1}^{N} X^{(i)}_{n}
+\end{equation}
+
+\textbf{2. Evolusi Stabilisator (Runge-Kutta Orde 4):} \\
+Variabel deterministik $S(t)$ diintegrasikan berdasarkan fungsi respons $f(S, \mu) = -\alpha S + \beta \mu$ dengan skema RK4:
+\begin{equation}
+S_{n+1} = S_{n} + \frac{\Delta t}{6}(k_{1} + 2k_{2} + 2k_{3} + k_{4})
+\end{equation}
+dengan tahap-tahap evaluasi gradien:
+\begin{align*}
+k_{1} &= f(S_{n}, \mu_{n}) \\
+k_{2} &= f\left(S_{n} + \frac{\Delta t}{2} k_{1}, \mu_{n}\right) \\
+k_{3} &= f\left(S_{n} + \frac{\Delta t}{2} k_{2}, \mu_{n}\right) \\
+k_{4} &= f(S_{n} + \Delta t k_{3}, \mu_{n})
+\end{align*}
+
+\subsection*{Hasil Simulasi Numerik}
+Pengujian numerik dilakukan dalam dua skenario parameter utama.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{trixe_stable_scenario.png}
+    \caption{Skenario Kestabilan ($\alpha > \beta$). Makrodinamika (kiri) menunjukkan konvergensi menuju Variabel Orbital $O_v = 0$. Mikrodinamika (kanan) mendemonstrasikan fungsi proyektif dari singularitas $>Xe$.}
+    \label{fig:stabil}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{trixe_bifurcation.png}
+    \caption{Diagram Bifurkasi Trixe. Mengonfirmasi keberadaan titik \textit{runaway} (ambang kritis) pada $\alpha = \beta = 1.5$. Melewati batas ini, deviasi stabilisator meledak secara eksponensial.}
+    \label{fig:bifurkasi}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{trixe_collapse_scenario.png}
+    \caption{Skenario Kegagalan dan Batas Kritis ($\beta > \alpha$). Makrodinamika (kiri) dan Mikrodinamika (kanan) menunjukkan bahwa ketika gaya respons melampaui daya redam, sistem mengalami divergensi \textit{runaway feedback} menuju tak terhingga.}
+    \label{fig:keruntuhan}
+\end{figure}
+
+\section{Analisis Konseptual dan Diskusi}
+Singularitas dalam kerangka Trixe berfungsi sebagai mesin fungsional yang memproses informasi probabilistik menjadi keluaran deterministik. Verifikasi numerik membuktikan bahwa transisi menuju kondisi deterministik ($>Xe$) bukanlah ekuilibrium alami dari sistem, melainkan kondisi bersyarat yang sangat bergantung pada efisiensi redaman. 
+
+Terdapat ambang batas kritis (titik bifurkasi $\alpha=\beta$) yang bertindak sebagai \textbf{titik \textit{runaway} (batas stabilitas asimtotik)}. Jika entropi probabilistik memberikan gaya umpan balik yang melampaui metrik daya redam stabilisator ($\beta>\alpha$), fungsionalitas Trixe akan mengalami divergensi tak terhingga. Modulus kestabilan akan pecah, menggagalkan konvergensi dan mengembalikan sistem ke dalam kekacauan murni. Hal ini mendemonstrasikan bahwa kepastian dalam sistem dinamis adalah produk fungsional dari arsitektur kontrol yang dikalibrasi secara ketat.
+
+\section{Kesimpulan}
+Model Trixe menawarkan kerangka kerja matematis yang terstruktur untuk mengendalikan transisi informasi dari kekacauan probabilistik menjadi konvergensi deterministik. Integrasi Variabel Orbital ($O_v$) dan mekanisme Singularitas Informasi menyediakan jalur transformasi operasional yang dapat diukur. Analisis stabilitas mengonfirmasi keberadaan batas kritis interaksi komponen pada $\alpha=\beta$. 
+
+\textbf{Batasan Model:} Sebagai catatan objektivitas akademis, perumusan model saat ini sebagian besar didasarkan pada asumsi gangguan \textit{Gaussian white noise} (proses Wiener standar). Analisis tentang ketahanan Trixe terhadap \textit{colored noise} atau proses lompatan (\textit{Lévy flights}) di dalam domain $<Xe$ tetap menjadi subjek yang terbuka. Untuk pengembangan lebih lanjut, kerangka fungsional ini memiliki potensi penerapan pragmatis dalam pengendalian derau pada komputasi, sinkronisasi jaringan, dan optimasi non-linear.
+
+\section*{Pernyataan Ketersediaan Data (\textit{Data Availability Statement})}
+Kode sumber Python yang mengimplementasikan integrasi numerik terkopel (skema Euler-Maruyama dan RK4) beserta kumpulan data dan grafik resolusi tinggi yang menyokong temuan dalam naskah ini tersedia secara publik di repositori terbuka. Data dapat diakses melalui tautan berikut: \url{[Masukkan Tautan Repositori GitHub/Zenodo Anda di Sini]}.
+
+\vspace{2em}
+
+% Daftar Pustaka
+\begin{thebibliography}{9}
+
+\bibitem{guckenheimer1983} 
+Guckenheimer, J., \& Holmes, P. (1983). \textit{Nonlinear Oscillations, Dynamical Systems, and Bifurcations of Vector Fields}. Springer-Verlag.
+
+\bibitem{haken1983}
+Haken, H. (1983). \textit{Synergetics: An Introduction and Advanced Topics}. Springer-Verlag.
+
+\bibitem{jazwinski1970}
+Jazwinski, A. H. (1970). \textit{Stochastic Processes and Filtering Theory}. Academic Press.
+
+\bibitem{langevin1908}
+Langevin, P. (1908). Sur la théorie du mouvement brownien. \textit{Comptes Rendus de l'Académie des Sciences}, 146(1), 530--533.
+
+\bibitem{lemongythiel1997}
+Lemons, D. S., \& Gythiel, A. (1997). Paul Langevin’s 1908 paper on the theory of Brownian motion. \textit{American Journal of Physics}, 65(11), 1079--1081.
+
+\bibitem{prigogine1977}
+Prigogine, I. (1977). Time, Structure and Fluctuations. \textit{Nobel Lecture}, 261--275.
+
+\bibitem{risken1989} 
+Risken, H. (1989). \textit{The Fokker-Planck Equation: Methods of Solution and Applications} (2nd ed.). Springer.
+
+\bibitem{shannon1948}
+Shannon, C. E. (1948). A Mathematical Theory of Communication. \textit{Bell System Technical Journal}, 27(3), 379--423.
+
+\bibitem{strogatz1994} 
+Strogatz, S. H. (1994). \textit{Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering}. Westview Press.
+
+\end{thebibliography}
+
+\end{document}

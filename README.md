@@ -17,9 +17,9 @@ Model Trixe memperkenalkan sebuah arsitektur tripartit yang menghubungkan:
 Verifikasi numerik di dalam repositori ini juga mendemonstrasikan ambang batas kritis (Titik Bifurkasi) di mana sistem dapat gagal mempertahankan determinisme dan mengalami *runaway feedback* jika gaya respons entropi melampaui daya redam sistem.
 
 ## 📂 Struktur Repositori
-- `📄 trixe-4.pdf` : Dokumen naskah lengkap (format *Preprint* akademis).
-- `📝 trixe.tex` : Kode sumber LaTeX dari naskah publikasi.
-- `🐍 trixe_sim.py` : Skrip Python untuk simulasi numerik berbasis metode *Euler-Maruyama*.
+- `📄 article`  : Dokumen naskah lengkap (format *Preprint* akademis).
+- `📝 latex` : Kode sumber LaTeX dari naskah lengkap.
+- `🐍 test` : Skrip Python untuk simulasi numerik berbasis metode *Euler-Maruyama*.
 
 ## 🔬 Menjalankan Simulasi Numerik
 Skrip simulasi `trixe_sim.py` digunakan untuk memvalidasi transisi makrodinamika dan mikrodinamika sistem, serta menguji titik runtuh (*collapse*) dari teori ini.
