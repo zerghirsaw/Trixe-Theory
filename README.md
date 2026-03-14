@@ -27,12 +27,12 @@ Ensure you have the following Python libraries installed:
 ```bash
 pip install numpy matplotlib scipy
 ```
-Running the Numerical Simulation
+### Running the Numerical Simulation
 
 The simulation script trixe_test_3.py is used to validate the macrodynamics and microdynamics transitions of the system, as well as to test the collapse point of this theoretical framework.
 License
 
-This project utilizes a dual-licensing strategy:
+### This project utilizes a dual-licensing strategy:
 
     Source Code: Licensed under the GNU GPL v3.
 
